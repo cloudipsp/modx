@@ -10,7 +10,7 @@
 2.1 Заполните все поля, в поле Класс-обработчик указать fondy.
 
 Скриншот настроек:![Скриншот][1]
-[1]: https://raw.githubusercontent.com/cloudipsp/modx/master/settings.jpg
+[1]: https://raw.githubusercontent.com/cloudipsp/modx/master/settings.png
 
 3. Открыть файл для редактирования core/components/minishop2/custom/payment/fondy.class.php
 
