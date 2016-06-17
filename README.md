@@ -9,7 +9,7 @@
 
 2.1 Заполните все поля, в поле Класс-обработчик указать fondy.
 
-Скриншот настроек:
+Скриншот настроек:![Скриншот][1]
 [1]: https://raw.githubusercontent.com/cloudipsp/modx/master/settings.jpg
 
 3. Открыть файл для редактирования core/components/minishop2/custom/payment/fondy.class.php
@@ -20,8 +20,8 @@ MERCHANT_ID - можно узнать в личном кабинете Fondy
 SECRET_KEY - можно узнать в личном кабинете Fondy
 SUCCESS_URL - ссылка для перехода на страницу после успешного платежа
 
-Скриншот настроек:
-[1]: https://raw.githubusercontent.com/cloudipsp/modx/master/settings1.png
+Скриншот настроек:![Скриншот][2]
+[2]: https://raw.githubusercontent.com/cloudipsp/modx/master/setting1.png
 
 Сохраните и обновите файл на сервере.
 
