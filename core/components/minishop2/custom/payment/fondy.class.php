@@ -132,8 +132,12 @@ class FondyForm
             Mage::throwException('An error has occurred during payment. Order is declined.');
         }
 		$responseSignature = $response['signature'];
-        unset($response['response_signature_string']);
-		unset($response['signature']);
+		if (isset($response['response_signature_string'])){
+			unset($response['response_signature_string']);
+		}
+		if (isset($response['signature'])){
+			unset($response['signature']);
+		}
 		if (FondyForm::getSignature($response, $oplataSettings['secret_key']) != $responseSignature) {
             return 'An error has occurred during payment. Signature is not valid.';
         }
