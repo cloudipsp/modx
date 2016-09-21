@@ -89,7 +89,7 @@
 				$miniShop2 = $this->modx->getService('miniShop2');
 				$miniShop2->changeOrderStatus($id[0], 2); // Setting status "paid"				
 			} else {
-				$this->paymentError($isPaymentValid, $params);
+				$this->paymentError($isPaymentValid, $_POST);
 			}
 		}
 		
