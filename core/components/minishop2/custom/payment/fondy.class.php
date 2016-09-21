@@ -87,6 +87,7 @@
 			{ 
 				$id=explode('#', $_POST['order_id']);
 				$miniShop2 = $this->modx->getService('miniShop2');
+				@$this->modx->context->key = 'mgr';
 				$miniShop2->changeOrderStatus($id[0], 2); // Setting status "paid"				
 			} else {
 				$this->paymentError($isPaymentValid, $_POST);
