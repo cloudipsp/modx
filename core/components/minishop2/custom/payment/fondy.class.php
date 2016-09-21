@@ -78,15 +78,17 @@
 				}
 				$request = $_POST;
 			}
-			$isPaymentValid = FondyForm::isPaymentValid($_POST,FONDY_SECRET_KEY);
+			$oplataSettings = array('merchant_id' => FONDY_MERCHANT_ID,
+			'secret_key' => FONDY_SECRET_KEY,
+			);
+			$isPaymentValid = FondyForm::isPaymentValid($oplataSettings, $_POST);
+			
 			if ($isPaymentValid == true)
 			{ 
 				$id=explode('#', $_POST['order_id']);
 				$miniShop2 = $this->modx->getService('miniShop2');
-				$miniShop2->changeOrderStatus($id[0], 2); // Setting status "paid"
-				//print_r ($_SERVER);die;
-				
-				} else {
+				$miniShop2->changeOrderStatus($id[0], 2); // Setting status "paid"				
+			} else {
 				$this->paymentError($isPaymentValid, $params);
 			}
 		}
