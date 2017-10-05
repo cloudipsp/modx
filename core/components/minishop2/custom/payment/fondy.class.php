@@ -2,7 +2,7 @@
 	define('FONDY_MERCHANT_ID', '1396424');
 	define('FONDY_SECRET_KEY', 'test');
 	define('FONDY_CURRENCY', 'RUB');
-	define('SUCCESS_URL', 'http://minishop');
+	define('SUCCESS_URL', 'http://minishop2');
 	
 	
 	
@@ -50,7 +50,7 @@
 			$order_desc = ("Оплата заказа - ".$id);
 			$currency = $this->config['currency'];
 			$amount = round($sum*100);
-			$eamil = $_POST[email];
+			$eamil = $_POST['email'];
 			$merchant_id = $this->config['merchantId'];
 			$signature=sha1($this->config['SecretId'].$razd.$amount.$razd.$currency.$razd.$merchant_id.$razd.$order_desc.$razd.$order_id.$razd.$response_url.$razd.$eamil.$razd.$server_callback_url);  //   
 			$data='server_callback_url='.$server_callback_url.'&response_url='.$response_url.'&order_id='.$order_id.'&order_desc='.$order_desc.'&currency='.$currency.'&amount='.$amount.'&signature='.$signature.'&merchant_id='.$merchant_id.'&sender_email='.$eamil;
@@ -69,23 +69,16 @@
 		}
 		
 		
-		public function receive(msOrder $order) { 
-			if (empty($_POST)) {
-				$fap = json_decode(file_get_contents("php://input"));
-				$_POST = array();
-				foreach ($fap as $key => $val) {
-					$_POST[$key] = $val;
-				}
-				$request = $_POST;
-			}
-			$oplataSettings = array('merchant_id' => FONDY_MERCHANT_ID,
-			'secret_key' => FONDY_SECRET_KEY,
+		public function receive(msOrder $order) {
+			$oplataSettings = array(
+				'merchant_id' => FONDY_MERCHANT_ID,
+				'secret_key' => FONDY_SECRET_KEY,
 			);
 			$isPaymentValid = FondyForm::isPaymentValid($oplataSettings, $_POST);
 			
-			if ($isPaymentValid == true)
-			{ 
-				$id=explode('#', $_POST['order_id']);
+			if ($isPaymentValid === true)
+			{
+				$id = explode('#', $_POST['order_id']);
 				$miniShop2 = $this->modx->getService('miniShop2');
 				@$this->modx->context->key = 'mgr';
 				$miniShop2->changeOrderStatus($id[0], 2); // Setting status "paid"				

@@ -14,9 +14,11 @@
 	$params = array();
 	
 	$handler = new Fondy($modx->newObject('msOrder'));
-	//print_r ($_POST); die;
+	
 	if (empty($_POST)) {
 		$fap = json_decode(file_get_contents("php://input"));
+		if(empty($fap))
+			die;
 		$_POST = array();
 		foreach ($fap as $key => $val) {
 			$_POST[$key] = $val;
@@ -25,15 +27,16 @@
 	}
 	if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		if ($_POST["response_status"]!='success') {
-			echo "Error";
-			die;
+				echo "Error";
+				die;
 			}elseif($_POST['order_status'] != 'approved'){
-			echo "Error order status";
-			die;
+				echo "Error order status";
+				die;
 			}else{
-			if ($order = $modx->getObject('msOrder', $_POST['response_status'])) {
+				$id = explode('#', $_POST['order_id']);
+				$order = $modx->getObject('msOrder', $id);
+				
 				$handler->receive($order);
 			}
-		}
 	}
 die;
